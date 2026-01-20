@@ -4,7 +4,7 @@ on:
   workflow_call:
     secrets:
       PYPI_TOKEN:
-        required: false
+        required: true
 
 permissions:
   id-token: write
