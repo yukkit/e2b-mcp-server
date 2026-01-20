@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "e2b-mcp-server"
+name = "yukkit-e2b-mcp-server"
 version = "0.1.0"
 description = "E2B MCP Server"
 authors = ["yukkit <yukkit@126.copm>"]
