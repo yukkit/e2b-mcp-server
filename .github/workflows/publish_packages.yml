@@ -2,9 +2,6 @@ name: Publish MCP Packages
 
 on:
   workflow_call:
-    secrets:
-      PYPI_TOKEN:
-        required: false
 
 permissions:
   id-token: write
@@ -75,8 +72,14 @@ jobs:
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
           NPM_TOKEN: "" # See https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+
+      - name: Publish to PyPI
+        if: hashFiles('packages/python/dist/*.whl') != ''
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: packages/python/dist/
+          skip-existing: true
 
       - name: Update lock file
         run: pnpm i --no-link --no-frozen-lockfile
