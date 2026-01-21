@@ -1,7 +1,7 @@
 {
   "name": "@yukkit/e2b-mcp-server-python",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.3.0",
   "scripts": {
     "postVersion": "poetry version $(pnpm pkg get version --workspaces=false | tr -d \\\")",
     "postPublish": "poetry build && poetry config pypi-token.pypi ${PYPI_TOKEN} && poetry publish --skip-existing"
