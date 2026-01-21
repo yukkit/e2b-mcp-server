@@ -97,6 +97,8 @@ const killSandboxSchema = z.object({
   sandboxId: z.string().describe("Sandbox ID"),
 });
 
+const listSandboxIdsSchema = z.object({});
+
 // Custom Errors
 class SandboxError extends Error {
   constructor(message: string) {
@@ -345,6 +347,11 @@ class E2BServer {
           description: "Kill a sandbox",
           inputSchema: zodToJsonSchema(killSandboxSchema),
         },
+        {
+          name: "list_sandbox_ids",
+          description: "List all active sandbox IDs and statistics",
+          inputSchema: zodToJsonSchema(listSandboxIdsSchema),
+        },
       ],
     }));
 
@@ -371,6 +378,8 @@ class E2BServer {
             return await this.handleGetSandboxUrl(request.params.arguments);
           case "kill_sandbox":
             return await this.handleKillSandbox(request.params.arguments);
+          case "list_sandbox_ids":
+            return await this.handleListSandboxIds(request.params.arguments);
           default:
             throw new McpError(
               ErrorCode.MethodNotFound,
@@ -411,7 +420,6 @@ class E2BServer {
     const result = {
       sandboxId,
       message: `Sandbox created successfully with timeout ${timeout}ms`,
-      stats: this.sandboxManager.getStats(),
     };
 
     return {
@@ -680,6 +688,28 @@ class E2BServer {
       message: "Sandbox killed successfully",
       stats: this.sandboxManager.getStats(),
     };
+
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(result, null, 2),
+        },
+      ],
+    };
+  }
+
+  private async handleListSandboxIds(args: any) {
+    listSandboxIdsSchema.parse(args);
+    
+    const stats = this.sandboxManager.getStats();
+    const result = {
+      sandbox_ids: stats.sandbox_ids,
+      active_sandboxes: stats.active_sandboxes,
+      max_sandboxes: stats.max_sandboxes,
+    };
+
+    logger.info(`Listed ${stats.active_sandboxes} active sandboxes`);
 
     return {
       content: [

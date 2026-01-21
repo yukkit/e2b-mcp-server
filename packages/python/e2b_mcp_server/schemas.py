@@ -74,3 +74,7 @@ class KillSandboxSchema(BaseModel):
     """Schema for killing a sandbox."""
 
     sandboxId: str = Field(..., description="Sandbox ID")
+
+
+class ListSandboxIdsSchema(BaseModel):
+    """Schema for listing all active sandbox IDs."""

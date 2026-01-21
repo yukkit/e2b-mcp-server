@@ -22,7 +22,7 @@ This server implements the [Model Context Protocol (MCP)](https://modelcontextpr
 
 ## Features
 
-- **9 Production-Ready Tools**: Complete toolkit for sandbox interaction
+- **10 Production-Ready Tools**: Complete toolkit for sandbox interaction
 - **Resource Management**: Automatic sandbox lifecycle management with configurable limits (default: 10 concurrent sandboxes)
 - **Robust Error Handling**: Custom error classes for clear diagnostics (SandboxError, SandboxNotFoundError, SandboxLimitExceededError)
 - **Production Logging**: Multi-level logging system (DEBUG, INFO, WARNING, ERROR) with timestamps
@@ -177,7 +177,21 @@ Get a download URL for a file in the sandbox.
 - `filePath`: Path to the file
 - `sandboxId`: Target sandbox ID
 
-### 9. kill_sandbox
+### 9. list_sandbox_ids
+
+List all active sandbox IDs and get sandbox statistics.
+
+**Parameters:**
+
+None
+
+**Returns:**
+
+- `sandbox_ids`: Array of active sandbox IDs
+- `active_sandboxes`: Current number of active sandboxes
+- `max_sandboxes`: Maximum allowed sandboxes
+
+### 10. kill_sandbox
 
 Terminate a sandbox and clean up resources.
 

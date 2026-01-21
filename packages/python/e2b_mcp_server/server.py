@@ -35,6 +35,7 @@ from .schemas import (
     GetSandboxUrlSchema,
     GetFileDownloadUrlSchema,
     KillSandboxSchema,
+    ListSandboxIdsSchema,
 )
 from .handlers import (
     handle_create_sandbox,
@@ -46,6 +47,7 @@ from .handlers import (
     handle_get_sandbox_url,
     handle_get_file_download_url,
     handle_kill_sandbox,
+    handle_list_sandbox_ids,
 )
 
 
@@ -132,6 +134,11 @@ async def list_tools() -> list[Tool]:
             description="Kill a sandbox",
             inputSchema=KillSandboxSchema.model_json_schema(),
         ),
+        Tool(
+            name="list_sandbox_ids",
+            description="List all active sandbox IDs and statistics",
+            inputSchema=ListSandboxIdsSchema.model_json_schema(),
+        ),
     ]
 
 
@@ -175,6 +182,8 @@ async def call_tool(
             return await handle_get_file_download_url(arguments, sandbox_manager)
         elif name == "kill_sandbox":
             return await handle_kill_sandbox(arguments, sandbox_manager)
+        elif name == "list_sandbox_ids":
+            return await handle_list_sandbox_ids(arguments, sandbox_manager)
         else:
             raise ValueError(f"Unknown tool: {name}")
 

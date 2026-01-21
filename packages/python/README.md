@@ -18,7 +18,7 @@ A production-grade Model Context Protocol server for executing code in secure, i
 
 ## 🛠️ Available Tools
 
-The server provides 9 powerful tools for sandbox interaction:
+The server provides 10 powerful tools for sandbox interaction:
 
 | Tool | Description |
 |------|-------------|
@@ -30,6 +30,7 @@ The server provides 9 powerful tools for sandbox interaction:
 | `list_files` | List files in a sandbox directory |
 | `get_sandbox_url` | Get URL for accessing sandbox on specific port |
 | `get_file_download_url` | Get download URL for a file in the sandbox |
+| `list_sandbox_ids` | List all active sandbox IDs and statistics |
 | `kill_sandbox` | Terminate and cleanup a sandbox |
 
 ## 📋 Requirements

@@ -22,6 +22,7 @@ from .schemas import (
     GetSandboxUrlSchema,
     GetFileDownloadUrlSchema,
     KillSandboxSchema,
+    ListSandboxIdsSchema,
 )
 from .utils import create_success_response
 
@@ -40,7 +41,6 @@ async def handle_create_sandbox(
     result = {
         "sandboxId": sandbox_id,
         "message": f"Sandbox created successfully with timeout {timeout}ms",
-        "stats": sandbox_manager.get_stats(),
     }
     return create_success_response(result)
 
@@ -265,4 +265,20 @@ async def handle_kill_sandbox(
         "message": "Sandbox killed successfully",
         "stats": sandbox_manager.get_stats(),
     }
+    return create_success_response(result)
+
+
+async def handle_list_sandbox_ids(
+    arguments: Any, sandbox_manager: SandboxManager
+) -> list[TextContent]:
+    """Handle list_sandbox_ids tool call."""
+    ListSandboxIdsSchema.model_validate(arguments)
+
+    stats = sandbox_manager.get_stats()
+    result = {
+        "sandbox_ids": stats["sandbox_ids"],
+        "active_sandboxes": stats["active_sandboxes"],
+        "max_sandboxes": stats["max_sandboxes"],
+    }
+    logger.info(f"Listed {stats['active_sandboxes']} active sandboxes")
     return create_success_response(result)

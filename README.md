@@ -27,7 +27,7 @@ This repository contains production-ready MCP server implementations in both Jav
 
 **Key features:**
 
-- **9 Production Tools**: Complete sandbox interaction toolkit
+- **10 Production Tools**: Complete sandbox interaction toolkit
 - **Resource Management**: Automatic lifecycle management with configurable limits
 - **Type Safety**: Full validation with Zod (JS) and Pydantic (Python)
 - **Robust Error Handling**: Clear diagnostics and graceful degradation
@@ -104,6 +104,7 @@ Add to your Claude Desktop config:
 | **list_files** | List directory contents | `folderPath`, `sandboxId` |
 | **get_sandbox_url** | Get public URL for a port | `port`, `sandboxId` |
 | **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId` |
+| **list_sandbox_ids** | List all active sandboxes | None |
 | **kill_sandbox** | Terminate a sandbox | `sandboxId` |
 
 ## Language Support
