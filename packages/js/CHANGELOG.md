@@ -1,5 +1,16 @@
 # @yukkit/e2b-mcp-server
 
+## 0.4.0
+
+### Minor Changes
+
+- cc1ba05: Add list_sandbox_ids tool to list all active sandboxes
+
+  - Add new `list_sandbox_ids` tool that returns all active sandbox IDs and statistics
+  - Update tool count from 9 to 10 in all documentation
+  - The tool returns: sandbox_ids (array), active_sandboxes (count), max_sandboxes (limit)
+  - Implemented in both JavaScript/TypeScript and Python versions
+
 ## 0.3.0
 
 ### Minor Changes
