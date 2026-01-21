@@ -88,6 +88,11 @@ const getSandboxUrlSchema = z.object({
   sandboxId: z.string().describe("Sandbox ID"),
 });
 
+const getFileDownloadUrlSchema = z.object({
+  filePath: z.string().min(1).describe("Path to the file"),
+  sandboxId: z.string().describe("Sandbox ID"),
+});
+
 const killSandboxSchema = z.object({
   sandboxId: z.string().describe("Sandbox ID"),
 });
@@ -331,6 +336,11 @@ class E2BServer {
           inputSchema: zodToJsonSchema(getSandboxUrlSchema),
         },
         {
+          name: "get_file_download_url",
+          description: "Get a download URL for a file in the sandbox",
+          inputSchema: zodToJsonSchema(getFileDownloadUrlSchema),
+        },
+        {
           name: "kill_sandbox",
           description: "Kill a sandbox",
           inputSchema: zodToJsonSchema(killSandboxSchema),
@@ -353,6 +363,8 @@ class E2BServer {
             return await this.handleWriteFile(request.params.arguments);
           case "list_files":
             return await this.handleListFiles(request.params.arguments);
+          case "get_file_download_url":
+            return await this.handleGetFileDownloadUrl(request.params.arguments);
           case "run_code":
             return await this.handleRunCode(request.params.arguments);
           case "get_sandbox_url":
@@ -626,6 +638,36 @@ class E2BServer {
     } catch (error) {
       logger.error(`Error getting sandbox URL: ${error}`);
       throw new SandboxError(`Failed to get sandbox URL: ${error}`);
+    }
+  }
+
+  private async handleGetFileDownloadUrl(args: any) {
+    const parsed = getFileDownloadUrlSchema.parse(args);
+    const sandbox = this.sandboxManager.getSandbox(parsed.sandboxId);
+
+    try {
+      const url = sandbox.downloadUrl(parsed.filePath);
+      const result = {
+        sandboxId: parsed.sandboxId,
+        filePath: parsed.filePath,
+        url,
+      };
+
+      logger.info(
+        `Got download URL for file ${parsed.filePath} in sandbox ${parsed.sandboxId}`
+      );
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
+      };
+    } catch (error) {
+      logger.error(`Error getting file download URL: ${error}`);
+      throw new SandboxError(`Failed to get file download URL: ${error}`);
     }
   }
 

@@ -33,6 +33,7 @@ from .schemas import (
     ListFilesSchema,
     RunCodeSchema,
     GetSandboxUrlSchema,
+    GetFileDownloadUrlSchema,
     KillSandboxSchema,
 )
 from .handlers import (
@@ -43,6 +44,7 @@ from .handlers import (
     handle_list_files,
     handle_run_code,
     handle_get_sandbox_url,
+    handle_get_file_download_url,
     handle_kill_sandbox,
 )
 
@@ -121,6 +123,11 @@ async def list_tools() -> list[Tool]:
             inputSchema=GetSandboxUrlSchema.model_json_schema(),
         ),
         Tool(
+            name="get_file_download_url",
+            description="Get a download URL for a file in the sandbox",
+            inputSchema=GetFileDownloadUrlSchema.model_json_schema(),
+        ),
+        Tool(
             name="kill_sandbox",
             description="Kill a sandbox",
             inputSchema=KillSandboxSchema.model_json_schema(),
@@ -164,6 +171,8 @@ async def call_tool(
             return await handle_run_code(arguments, sandbox_manager)
         elif name == "get_sandbox_url":
             return await handle_get_sandbox_url(arguments, sandbox_manager)
+        elif name == "get_file_download_url":
+            return await handle_get_file_download_url(arguments, sandbox_manager)
         elif name == "kill_sandbox":
             return await handle_kill_sandbox(arguments, sandbox_manager)
         else:

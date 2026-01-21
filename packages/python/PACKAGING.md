@@ -388,4 +388,4 @@ pip install dist/*.whl
 
 ---
 
-有问题？查看 [Poetry 文档](https://python-poetry.org/docs/) 或提交 [Issue](https://github.com/e2b-dev/mcp-server/issues)
+有问题？查看 [Poetry 文档](https://python-poetry.org/docs/) 或提交 [Issue](https://github.com/yukkit/e2b-mcp-server/issues)

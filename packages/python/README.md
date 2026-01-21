@@ -18,7 +18,7 @@ A production-grade Model Context Protocol server for executing code in secure, i
 
 ## 🛠️ Available Tools
 
-The server provides 8 powerful tools for sandbox interaction:
+The server provides 9 powerful tools for sandbox interaction:
 
 | Tool | Description |
 |------|-------------|
@@ -29,6 +29,7 @@ The server provides 8 powerful tools for sandbox interaction:
 | `write_file` | Write content to files in the sandbox |
 | `list_files` | List files in a sandbox directory |
 | `get_sandbox_url` | Get URL for accessing sandbox on specific port |
+| `get_file_download_url` | Get download URL for a file in the sandbox |
 | `kill_sandbox` | Terminate and cleanup a sandbox |
 
 ## 📋 Requirements
@@ -192,7 +193,7 @@ python -m e2b_mcp_server
 
 ```bash
 # Clone the repository
-git clone https://github.com/e2b-dev/mcp-server
+git clone https://github.com/yukkit/e2b-mcp-server
 cd mcp-server/packages/python
 
 # Install dependencies
@@ -371,14 +372,14 @@ Apache 2.0 - See LICENSE file for details.
 
 - [E2B Documentation](https://e2b.dev/docs)
 - [Model Context Protocol](https://modelcontextprotocol.io)
-- [GitHub Repository](https://github.com/e2b-dev/mcp-server)
-- [Issue Tracker](https://github.com/e2b-dev/mcp-server/issues)
+- [GitHub Repository](https://github.com/yukkit/e2b-mcp-server)
+- [Issue Tracker](https://github.com/yukkit/e2b-mcp-server/issues)
 
 ## 💬 Support
 
 - 📧 Email: <hello@e2b.dev>
 - 💬 Discord: [Join our community](https://discord.gg/U7KEcGErtQ)
-- 🐛 Issues: [GitHub Issues](https://github.com/e2b-dev/mcp-server/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/yukkit/e2b-mcp-server/issues)
 
 ## 🙏 Acknowledgments
 

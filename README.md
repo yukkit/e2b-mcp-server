@@ -6,7 +6,7 @@
 [![smithery badge](https://smithery.ai/badge/e2b)](https://smithery.ai/server/e2b)
 [![npm version](https://img.shields.io/npm/v/@yukkit/e2b-mcp-server.svg)](https://www.npmjs.com/package/@yukkit/e2b-mcp-server)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/e2b-dev/mcp-server/publish_packages.yml?branch=main)](https://github.com/e2b-dev/mcp-server/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/yukkit/e2b-mcp-server/publish_packages.yml?branch=main)](https://github.com/yukkit/e2b-mcp-server/actions)
 
 Production-grade [Model Context Protocol](https://modelcontextprotocol.io) servers that enable AI assistants to execute code securely in isolated [E2B](https://e2b.dev) sandboxes. Bring powerful code interpretation capabilities to Claude Desktop, Cline, and other MCP-compatible clients.
 
@@ -27,7 +27,7 @@ This repository contains production-ready MCP server implementations in both Jav
 
 **Key features:**
 
-- **8 Production Tools**: Complete sandbox interaction toolkit
+- **9 Production Tools**: Complete sandbox interaction toolkit
 - **Resource Management**: Automatic lifecycle management with configurable limits
 - **Type Safety**: Full validation with Zod (JS) and Pydantic (Python)
 - **Robust Error Handling**: Clear diagnostics and graceful degradation
@@ -103,6 +103,7 @@ Add to your Claude Desktop config:
 | **write_file** | Write to a file | `filePath`, `fileContents`, `sandboxId` |
 | **list_files** | List directory contents | `folderPath`, `sandboxId` |
 | **get_sandbox_url** | Get public URL for a port | `port`, `sandboxId` |
+| **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId` |
 | **kill_sandbox** | Terminate a sandbox | `sandboxId` |
 
 ## Language Support
@@ -215,7 +216,7 @@ pnpm run publish
 ## Support
 
 - **Documentation**: Check the [JavaScript](packages/js/README.md) or [Python](packages/python/README.md) READMEs
-- **Issues**: [Open an issue](https://github.com/e2b-dev/mcp-server/issues)
+- **Issues**: [Open an issue](https://github.com/yukkit/e2b-mcp-server/issues)
 - **E2B Platform**: [support@e2b.dev](mailto:support@e2b.dev)
 - **Discord**: Join the [E2B Community](https://discord.gg/U7KEcGErtQ)
 

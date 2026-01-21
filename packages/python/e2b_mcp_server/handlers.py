@@ -20,6 +20,7 @@ from .schemas import (
     ListFilesSchema,
     RunCodeSchema,
     GetSandboxUrlSchema,
+    GetFileDownloadUrlSchema,
     KillSandboxSchema,
 )
 from .utils import create_success_response
@@ -225,6 +226,30 @@ async def handle_get_sandbox_url(
     except Exception as e:
         logger.error(f"Error getting sandbox URL: {e}")
         raise SandboxError(f"Failed to get sandbox URL: {e}") from e
+
+
+async def handle_get_file_download_url(
+    arguments: Any, sandbox_manager: SandboxManager
+) -> list[TextContent]:
+    """Handle get_file_download_url tool call."""
+    args = GetFileDownloadUrlSchema.model_validate(arguments)
+
+    sbx = sandbox_manager.get_sandbox(args.sandboxId)
+
+    try:
+        url = sbx.files.download_file(args.filePath)
+        result = {
+            "sandboxId": args.sandboxId,
+            "filePath": args.filePath,
+            "url": url,
+        }
+        logger.info(
+            f"Got download URL for file {args.filePath} in sandbox {args.sandboxId}"
+        )
+        return create_success_response(result)
+    except Exception as e:
+        logger.error(f"Error getting file download URL: {e}")
+        raise SandboxError(f"Failed to get file download URL: {e}") from e
 
 
 async def handle_kill_sandbox(

@@ -63,6 +63,13 @@ class GetSandboxUrlSchema(BaseModel):
     sandboxId: str = Field(..., description="Sandbox ID")
 
 
+class GetFileDownloadUrlSchema(BaseModel):
+    """Schema for getting a file download URL."""
+
+    filePath: str = Field(..., description="Path to the file", min_length=1)
+    sandboxId: str = Field(..., description="Sandbox ID")
+
+
 class KillSandboxSchema(BaseModel):
     """Schema for killing a sandbox."""
 
