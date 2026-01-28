@@ -43,6 +43,7 @@ const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
 
 // Schemas
 const createSandboxSchema = z.object({
+  secure: z.boolean().default(true).describe("Whether to create a secure sandbox"),
   timeoutMs: z
     .number()
     .min(1000)
@@ -91,6 +92,7 @@ const getSandboxUrlSchema = z.object({
 const getFileDownloadUrlSchema = z.object({
   filePath: z.string().min(1).describe("Path to the file"),
   sandboxId: z.string().describe("Sandbox ID"),
+  useSignatureExpiration: z.number().default(10_000).describe("Signature expiration in milliseconds"),
 });
 
 const killSandboxSchema = z.object({
@@ -166,7 +168,8 @@ class SandboxManager {
   }
 
   async createSandbox(
-    timeoutMs?: number
+    secure: boolean,
+    timeoutMs?: number,
   ): Promise<{ sandboxId: string; sandbox: Sandbox }> {
     if (this.sandboxes.size >= this.maxSandboxes) {
       throw new SandboxLimitExceededError(
@@ -180,7 +183,7 @@ class SandboxManager {
     );
 
     try {
-      const sandbox = await Sandbox.create({ timeoutMs: timeout });
+      const sandbox = await Sandbox.create({ timeoutMs: timeout, secure: secure });
       const sandboxId = sandbox.sandboxId;
       this.sandboxes.set(sandboxId, sandbox);
       logger.info(
@@ -413,7 +416,8 @@ class E2BServer {
   private async handleCreateSandbox(args: any) {
     const parsed = createSandboxSchema.parse(args);
     const { sandboxId } = await this.sandboxManager.createSandbox(
-      parsed.timeoutMs
+      parsed.secure,
+      parsed.timeoutMs,
     );
     const timeout = parsed.timeoutMs || DEFAULT_SANDBOX_TIMEOUT_MS;
 
@@ -652,9 +656,12 @@ class E2BServer {
   private async handleGetFileDownloadUrl(args: any) {
     const parsed = getFileDownloadUrlSchema.parse(args);
     const sandbox = this.sandboxManager.getSandbox(parsed.sandboxId);
+    const useSignatureExpiration = parsed.useSignatureExpiration;
 
     try {
-      const url = sandbox.downloadUrl(parsed.filePath);
+      const url = await sandbox.downloadUrl(parsed.filePath, {
+        useSignatureExpiration: useSignatureExpiration,
+      });
       const result = {
         sandboxId: parsed.sandboxId,
         filePath: parsed.filePath,

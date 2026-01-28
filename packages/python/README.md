@@ -330,7 +330,8 @@ All tools use Pydantic schemas for validation. See `schemas.py` for details.
 
 ```python
 {
-  "timeoutMs": 300000  # Optional, milliseconds
+  "secure": true,        # Optional, default: true
+  "timeoutMs": 300000    # Optional, milliseconds
 }
 ```
 
@@ -350,6 +351,16 @@ All tools use Pydantic schemas for validation. See `schemas.py` for details.
   "command": "ls -la",            # Required
   "sandboxId": "sbx_...",         # Required
   "background": false             # Optional
+}
+```
+
+#### get_file_download_url
+
+```python
+{
+  "filePath": "/path/to/file",     # Required
+  "sandboxId": "sbx_...",          # Required
+  "useSignatureExpiration": 10000  # Optional, milliseconds, default: 10000
 }
 ```
 

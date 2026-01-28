@@ -110,6 +110,7 @@ Create a new isolated code execution sandbox.
 
 **Parameters:**
 
+- `secure` (optional): Whether to create a secure sandbox (default: true)
 - `timeoutMs` (optional): Sandbox timeout in milliseconds (default: 300000, max: 3600000)
 
 ### 2. run_code
@@ -176,6 +177,7 @@ Get a download URL for a file in the sandbox.
 
 - `filePath`: Path to the file
 - `sandboxId`: Target sandbox ID
+- `useSignatureExpiration` (optional): Signature expiration in milliseconds (default: 10000)
 
 ### 9. list_sandbox_ids
 

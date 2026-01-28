@@ -96,14 +96,14 @@ Add to your Claude Desktop config:
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
-| **create_sandbox** | Create a new isolated sandbox | `timeoutMs` (optional) |
+| **create_sandbox** | Create a new isolated sandbox | `secure` (default: true), `timeoutMs` (optional) |
 | **run_code** | Execute Python code in a sandbox | `code`, `sandboxId` (optional) |
 | **run_command** | Run shell commands | `command`, `sandboxId`, `background` |
 | **read_file** | Read file contents | `filePath`, `sandboxId` |
 | **write_file** | Write to a file | `filePath`, `fileContents`, `sandboxId` |
 | **list_files** | List directory contents | `folderPath`, `sandboxId` |
 | **get_sandbox_url** | Get public URL for a port | `port`, `sandboxId` |
-| **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId` |
+| **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId`, `useSignatureExpiration` (default: 10000ms) |
 | **list_sandbox_ids** | List all active sandboxes | None |
 | **kill_sandbox** | Terminate a sandbox | `sandboxId` |
 

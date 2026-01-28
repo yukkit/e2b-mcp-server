@@ -35,7 +35,7 @@ async def handle_create_sandbox(
     """Handle create_sandbox tool call."""
     args = CreateSandboxSchema.model_validate(arguments)
 
-    sandbox_id, _ = sandbox_manager.create_sandbox(args.timeoutMs)
+    sandbox_id, _ = sandbox_manager.create_sandbox(args.secure, args.timeoutMs)
     timeout = args.timeoutMs if args.timeoutMs else DEFAULT_SANDBOX_TIMEOUT_MS
 
     result = {
@@ -237,7 +237,9 @@ async def handle_get_file_download_url(
     sbx = sandbox_manager.get_sandbox(args.sandboxId)
 
     try:
-        url = sbx.download_url(args.filePath)
+        url = sbx.download_url(
+            args.filePath, use_signature_expiration=args.useSignatureExpiration
+        )
         result = {
             "sandboxId": args.sandboxId,
             "filePath": args.filePath,

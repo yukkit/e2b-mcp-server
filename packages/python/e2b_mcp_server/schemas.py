@@ -21,6 +21,7 @@ class RunCodeSchema(BaseModel):
 class CreateSandboxSchema(BaseModel):
     """Schema for creating a new sandbox."""
 
+    secure: bool = Field(True, description="Whether to create a secure sandbox")
     timeoutMs: Optional[int] = Field(
         None, description="Timeout in milliseconds", ge=1000, le=MAX_SANDBOX_TIMEOUT_MS
     )
@@ -68,6 +69,9 @@ class GetFileDownloadUrlSchema(BaseModel):
 
     filePath: str = Field(..., description="Path to the file", min_length=1)
     sandboxId: str = Field(..., description="Sandbox ID")
+    useSignatureExpiration: int = Field(
+        10_000, description="Signature expiration in milliseconds"
+    )
 
 
 class KillSandboxSchema(BaseModel):

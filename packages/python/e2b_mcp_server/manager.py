@@ -40,11 +40,14 @@ class SandboxManager:
         self._max_sandboxes = max_sandboxes
         logger.info(f"SandboxManager initialized with max_sandboxes={max_sandboxes}")
 
-    def create_sandbox(self, timeout_ms: Optional[int] = None) -> tuple[str, Sandbox]:
+    def create_sandbox(
+        self, secure: bool, timeout_ms: Optional[int] = None
+    ) -> tuple[str, Sandbox]:
         """
         Create a new sandbox with proper error handling.
 
         Args:
+            secure: Whether to create a secure sandbox
             timeout_ms: Timeout in milliseconds
 
         Returns:
@@ -62,7 +65,7 @@ class SandboxManager:
         timeout = min(timeout, MAX_SANDBOX_TIMEOUT_MS)
 
         try:
-            sbx = Sandbox(timeout=timeout)
+            sbx = Sandbox(timeout=timeout, secure=secure)
             sandbox_id = sbx.sandbox_id
             self._sandboxes[sandbox_id] = sbx
             logger.info(
