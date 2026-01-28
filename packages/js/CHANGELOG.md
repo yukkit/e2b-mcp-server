@@ -1,5 +1,11 @@
 # @yukkit/e2b-mcp-server
 
+## 0.4.1
+
+### Patch Changes
+
+- 1dd827a: fix: get download url
+
 ## 0.4.0
 
 ### Minor Changes
