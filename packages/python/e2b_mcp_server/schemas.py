@@ -3,6 +3,7 @@ Pydantic schemas for E2B MCP Server tool validation.
 """
 
 from typing import Optional
+
 from pydantic import BaseModel, Field
 
 from .constants import MAX_SANDBOX_TIMEOUT_MS
@@ -81,4 +82,6 @@ class KillSandboxSchema(BaseModel):
 
 
 class ListSandboxIdsSchema(BaseModel):
+    """Schema for listing all active sandbox IDs."""
+
     """Schema for listing all active sandbox IDs."""

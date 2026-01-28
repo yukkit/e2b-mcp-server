@@ -12,7 +12,7 @@ packages = [{ include = "e2b_mcp_server" }]
 [tool.poetry.dependencies]
 python = ">=3.12,<4.0"
 
-e2b-code-interpreter = "^1.0.2"
+e2b-code-interpreter = "^2.3.3"
 mcp = "^1.23.3"
 pydantic = "^2.10.2"
 python-dotenv = "1.0.1"

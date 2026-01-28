@@ -21,7 +21,7 @@
     "inspector": "npx @modelcontextprotocol/inspector build/index.js"
   },
   "dependencies": {
-    "@e2b/code-interpreter": "^1.0.4",
+    "@e2b/code-interpreter": "^2.3.3",
     "@modelcontextprotocol/sdk": "1.25.2",
     "dotenv": "^16.4.5",
     "zod": "^3.25.1",
