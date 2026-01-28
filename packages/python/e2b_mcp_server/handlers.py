@@ -14,15 +14,15 @@ from .exceptions import SandboxError
 from .manager import SandboxManager
 from .schemas import (
     CreateSandboxSchema,
-    RunCommandSchema,
-    ReadFileSchema,
-    WriteFileSchema,
-    ListFilesSchema,
-    RunCodeSchema,
-    GetSandboxUrlSchema,
     GetFileDownloadUrlSchema,
+    GetSandboxUrlSchema,
     KillSandboxSchema,
+    ListFilesSchema,
     ListSandboxIdsSchema,
+    ReadFileSchema,
+    RunCodeSchema,
+    RunCommandSchema,
+    WriteFileSchema,
 )
 from .utils import create_success_response
 
@@ -237,7 +237,7 @@ async def handle_get_file_download_url(
     sbx = sandbox_manager.get_sandbox(args.sandboxId)
 
     try:
-        url = sbx.files.download_file(args.filePath)
+        url = sbx.download_url(args.filePath)
         result = {
             "sandboxId": args.sandboxId,
             "filePath": args.filePath,

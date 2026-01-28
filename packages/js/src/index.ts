@@ -438,7 +438,7 @@ class E2BServer {
 
     try {
       let response: any;
-      
+
       if (parsed.background) {
         const result = await sandbox.commands.run(parsed.command, { background: true });
         response = {
@@ -658,7 +658,7 @@ class E2BServer {
       const result = {
         sandboxId: parsed.sandboxId,
         filePath: parsed.filePath,
-        url,
+        url: url,
       };
 
       logger.info(
@@ -701,7 +701,7 @@ class E2BServer {
 
   private async handleListSandboxIds(args: any) {
     listSandboxIdsSchema.parse(args);
-    
+
     const stats = this.sandboxManager.getStats();
     const result = {
       sandbox_ids: stats.sandbox_ids,
