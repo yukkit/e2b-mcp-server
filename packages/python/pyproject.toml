@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yukkit-e2b-mcp-server"
-version = "0.5.0"
+version = "0.6.0"
 description = "E2B MCP Server"
 authors = ["yukkit <yukkit@126.copm>"]
 license = "Apache-2.0"

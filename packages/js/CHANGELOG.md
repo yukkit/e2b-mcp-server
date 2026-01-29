@@ -1,5 +1,11 @@
 # @yukkit/e2b-mcp-server
 
+## 0.6.0
+
+### Minor Changes
+
+- 589b7da: fix: set useSignatureExpiration default to 5 minutes (300000ms)
+
 ## 0.5.0
 
 ### Minor Changes
