@@ -177,7 +177,7 @@ Get a download URL for a file in the sandbox.
 
 - `filePath`: Path to the file
 - `sandboxId`: Target sandbox ID
-- `useSignatureExpiration` (optional): Signature expiration in milliseconds (default: 10000)
+- `useSignatureExpiration` (optional): Signature expiration in milliseconds (default: 300000 / 5 minutes)
 
 ### 9. list_sandbox_ids
 

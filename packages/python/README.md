@@ -358,9 +358,9 @@ All tools use Pydantic schemas for validation. See `schemas.py` for details.
 
 ```python
 {
-  "filePath": "/path/to/file",     # Required
-  "sandboxId": "sbx_...",          # Required
-  "useSignatureExpiration": 10000  # Optional, milliseconds, default: 10000
+  "filePath": "/path/to/file",      # Required
+  "sandboxId": "sbx_...",           # Required
+  "useSignatureExpiration": 300_000 # Optional, milliseconds, default: 300000 (5 minutes)
 }
 ```
 

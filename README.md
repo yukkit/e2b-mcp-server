@@ -103,7 +103,7 @@ Add to your Claude Desktop config:
 | **write_file** | Write to a file | `filePath`, `fileContents`, `sandboxId` |
 | **list_files** | List directory contents | `folderPath`, `sandboxId` |
 | **get_sandbox_url** | Get public URL for a port | `port`, `sandboxId` |
-| **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId`, `useSignatureExpiration` (default: 10000ms) |
+| **get_file_download_url** | Get download URL for a file | `filePath`, `sandboxId`, `useSignatureExpiration` (default: 300000ms / 5 min) |
 | **list_sandbox_ids** | List all active sandboxes | None |
 | **kill_sandbox** | Terminate a sandbox | `sandboxId` |
 

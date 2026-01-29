@@ -92,7 +92,7 @@ const getSandboxUrlSchema = z.object({
 const getFileDownloadUrlSchema = z.object({
   filePath: z.string().min(1).describe("Path to the file"),
   sandboxId: z.string().describe("Sandbox ID"),
-  useSignatureExpiration: z.number().default(10_000).describe("Signature expiration in milliseconds"),
+  useSignatureExpiration: z.number().default(300_000).describe("Signature expiration in milliseconds (default: 5 minutes)"),
 });
 
 const killSandboxSchema = z.object({

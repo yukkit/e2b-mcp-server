@@ -71,7 +71,7 @@ class GetFileDownloadUrlSchema(BaseModel):
     filePath: str = Field(..., description="Path to the file", min_length=1)
     sandboxId: str = Field(..., description="Sandbox ID")
     useSignatureExpiration: int = Field(
-        10_000, description="Signature expiration in milliseconds"
+        300_000, description="Signature expiration in milliseconds (default: 5 minutes)"
     )
 
 
